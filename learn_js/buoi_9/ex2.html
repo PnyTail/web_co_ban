@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        nhập số:
+        <input type="text" id="input_so">
+        <br>
+        <button type="button" onclick="check_chan_le()">Kiểm tra chẵn lẻ</button>
+    </form>
+    <div id="ket_qua"></div>
+
+    <script>
+        function check_chan_le() {
+            let so = document.getElementById('input_so').value;
+            if (so % 2 == 0) {
+                document.getElementById('ket_qua').innerHTML = 'so chan';
+                document.getElementById('ket_qua').style.color = 'red';
+            } else {
+                document.getElementById('ket_qua').innerHTML = (`${so} là số lẻ`);
+                document.getElementById('ket_qua').style.color = 'black';
+            }
+        }
+        /*
+            lưu ý: so sánh số với chữ == , ===, phải ép kiểu về số
+            parseInt('123') => 123
+        */ 
+        
+    </script>
+</body>
+</html>

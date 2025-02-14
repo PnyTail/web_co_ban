@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buổi 9</title>
+</head>
+<body>
+
+    <form>
+        nhập tên:
+        <input type="text" id="name">
+        <br>
+        <button type="button" onclick="in_ra()">Kiểm tra IQ</button>
+
+        <!-- tải lại trang là vì nút mặc định của form là submit và sẽ gửi thông tin đi và sẽ load lại trang
+            cần set lại type = button thì nó sẽ không gửi gì nữa 
+        -->
+    </form>
+    <div id="ket_qua"></div>
+
+    <script>
+        function in_ra() {
+            let ten =  document.getElementById('name').value;
+            document.getElementById('ket_qua').innerHTML = (`Xin chào ${ten}`);
+        }
+    </script>
+</body>
+</html>
