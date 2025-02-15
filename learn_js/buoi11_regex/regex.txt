@@ -1,0 +1,182 @@
+
+https://regex101.com/
+
+[] : min: 1, max: 1
+\ : ép nó là ký tự bình thường
+
+vd: email: nam@gmail.com
+
+    [a-z]+@[a-z]+\.[a-z]+
+
+        ->  nam@gmail.com
+            nam@yahoo.com
+            nam@xyz.abc
+
+    [a-z0-9\_]+@[a-z]+\.[a-z]+
+    [a-z0-9_]+@[a-z]+\.[a-z]+
+
+    -> vai_ca_1_lit_chuong@bcs.ok
+
+
+{1,10} : min: 1, max: 10
+vd: [a-z]{1,10}
+    -> abcdefghijklmnop
+    tách làm 2 chuỗi: 0-10 abcdefghij
+                    10-16    klmnop
+
+{1,}: min: 1, max: vô cực
+
+{10}: min: 10, max: 10
+
+* : min: 0, max: vô cực = {0,}
+
++ : min: 1, max: vô cực = {1,}
+
+? : min: 0, max: 1 = {0,1}
+vd: ab?c
+    -> abc
+        ac
+
+    a[bd]?c
+    -> abc
+        ac
+        adc
+    
+^ : bắt đầu chuỗi
+$ : kết thúc chuỗi
+vd: ^[a-z0-9]+@[a-z]+\.[a-z]+
+    -> nam12@gmail.com  -> chuỗi đúng
+
+    3 dòng dưới là sai
+        abc@gmail.com %^&%$#^&%dsfghvc
+        !@#$%^nam@com.xyz$%^&*(
+        #$%^&*()nam@com.abc
+
+\w : [a-zA-Z0-9]
+
+\W : [^a-zA-Z0-9] : tức là ngược lại tất cả các ký tự bên trong, dấu "[" và "^" có nghĩa là ngược lại tất cả các ký tự 
+                    trong ngoặc vuông
+    ngược lại tức là những ký tự khác không nằm trong phạm vi này
+    vd: @ \ "dấu cách" 
+
+\d : [0-9]
+\D : [^0-9] ngược lại từ 0 - 9
+
+. : mọi ký tự (mọi thứ)
+
+(a|z) : [az]
+(ab|dc) : ab hoặc dc
+
+
+------------------------------------------------------------------------------
+vd về sđt:
+^0[1-9][0-9]{8,9}$ (trường hợp cho phép 10 hoặc 11 số)
+    -> 0331467892 (đúng)
+        03314678924 (đúng)
+        033146789244567854567
+        0103456897 (đúng)
+        0031467892
+        0123456789 (đúng)
+        0000000000
+        0
+        01234
+        178654
+        0331467892000
+
+    ^0[1-9][0-9]{8}$ (trường hợp sdt 10 số)
+
+^(0|\+84)[1-9][0-9]{8,9}$ (trường hợp số 0 hoặc +84 đứng đầu)
+
+^(?:0|\+84)[1-9][0-9]{8,9}$ (có thêm ?: là để không tạo ra group, kết quả vẫn giống câu trên)
+
+-------------------------------------------------------------------------------------------
+vd tuổi từ 1 - 199
+1 số : ^[1-9]$
+-> 12
+    07
+    18
+    21
+    27
+    100
+    199
+    8 (đúng)
+    0
+
+2 số : ^[1-9][0-9]$
+    ->
+        12 (đúng)
+        08
+        18 (đúng)
+        21 (đúng)
+        27 (đúng)
+        10 (đúng)
+        99 (đúng)
+        100
+        199
+        8
+        0
+
+3 số : ^1[0-9]{2}$
+->
+    12
+    07
+    18
+    21
+    27
+    100 (đúng)
+    1000
+    10
+    199 (đúng)
+    8
+    0
+
+------------------------------------------------------------------------------------
+vd: điểm (0-10, số thập phân, tối đa 2 số sau dấu phẩy, cách nhau bởi phẩy hoặc chấm)
+^(10|[0-9](\.[0-9]?[1-9])?)$
+        0 (đúng)
+        5 (đúng)
+        10 (đúng)
+        0.5 (đúng)
+        0.25 (đúng)
+        5.76 (đúng)
+        3.03 (đúng)
+        5.0
+        3.333
+        11
+        10.5
+        3.30
+
+------------------------------------------------------------------------------------
+vd: tên - viết hoa mỗi chữ cái đầu và không có dấu tiếng Việt
+^[A-Z][a-z]+(?: [A-z][a-z]*)+$
+->
+    Nguyen Nam Long (đúng)
+    Nguyen A (đúng)
+    Nguyen Van Thi Te Kwefdk (đúng)
+    Long
+    nguyen
+    nguyen nam
+    Nguyen Long 
+    NguyeN NaM LonG
+
+^[A-Z][a-z]+(?: [A-z][a-z]*)*$
+->
+    Nguyen Nam Long (đúng)
+    Nguyen A (đúng)
+    Nguyen Van Thi Te Kwefdk (đúng)
+    Long (đúng)
+    nguyen
+    nguyen nam
+    Nguyen Long 
+    NguyeN NaM LonG
+
+
+
+
+
+
+
+
+
+
+
