@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .spanError {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        Tên:
+        <input type="text" id="ten">
+        <span id="errorTen" class="spanError"></span>
+        <br>
+        Ngày sinh:
+        <input type="date" id="ngaySinh">
+        <span id="errorNgaySinh" class="spanError"></span>
+        <br>
+        Giới tính:
+        <input type="radio" name="gioiTinh" value="nam">Nam
+        <input type="radio" name="gioiTinh" value="nu">Nữ
+        <span id="errorGioiTinh" class="spanError"></span>
+        <br>
+        Email:
+        <input type="email" id="email">
+        <br>
+        Mật khẩu:
+        <input type="password" id="matKhau">
+        <span id="errorMatKhau" class="spanError"></span>
+        <br>
+        Lớp:
+        <select id="">
+            <option value="lop1">Lập trình</option>
+            <option value="lop2">Bảo mật</option>
+        </select>
+        <br>
+        <button type="submit" onclick="return kiemTra()">Đăng ký</button>
+    </form>
+
+    <script>
+        function kiemTra() {
+            let kiem_tra_loi = false;
+            // tên
+            let ten = document.getElementById('ten').value;
+            if (ten.length === 0) {
+                document.getElementById('errorTen').innerHTML = 'Tên không được để trống';
+                kiem_tra_loi = true;
+            } else {
+                let regex_ten = /^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+ [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+(?: [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)*/;
+                // regex_ten.test(ten) === false
+                if (!regex_ten.test(ten)) {
+                    document.getElementById('errorTen').innerHTML = 'Tên không hợp lệ';
+                    kiem_tra_loi = true;
+                } else {
+                    document.getElementById('errorTen').innerHTML = '';
+                }
+            }
+            // return true;
+
+            // ngày sinh
+            let ngaySinh = document.getElementById('ngaySinh').value;
+            if (ngaySinh.length === 0) {
+                document.getElementById('errorNgaySinh').innerHTML = 'Ngày sinh không được để trống';
+                kiem_tra_loi = true;
+            } else {
+                document.getElementById('errorNgaySinh').innerHTML = '';
+            }
+
+            // giới tính
+            let mangGioiTinh = document.getElementsByName('gioiTinh');
+            let kiemTraGioiTinh = false;
+            for (let i = 0; i < mangGioiTinh.length; i++) {
+                if (mangGioiTinh[i].checked) {
+                    kiemTraGioiTinh = true;
+                    // break;
+                }
+            }
+
+            // kiemTraGioiTinh === false
+            if (!kiemTraGioiTinh) {
+                document.getElementById('errorGioiTinh').innerHTML = 'Giới tính không được để trống';
+                kiem_tra_loi = true;
+            } else {
+                document.getElementById('errorGioiTinh').innerHTML = '';
+            }
+
+            // mật khẩu
+            let matKhau = document.getElementById('matKhau').value;
+            if (matKhau.length === 0) {
+                document.getElementById('errorMatKhau').innerHTML = 'Mật khẩu không được để trống';
+                kiem_tra_loi = true;
+            } else if (matKhau.length < 8) {
+                document.getElementById('errorMatKhau').innerHTML = 'Mật khẩu phải lớn hơn hoặc bằng 8 ký tự';
+                kiem_tra_loi = true;
+            } else {
+                document.getElementById('errorMatKhau').innerHTML = '';
+            }
+
+            if (kiem_tra_loi) {
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
