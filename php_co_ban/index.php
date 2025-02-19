@@ -11,13 +11,27 @@
     <?php 
         include 'connect.php';
 
-        $sql = "select * from tin_tuc";
+        $tim_kiem = '';
+
+        if (isset($_GET['tim_kiem'])) {
+            $tim_kiem = $_GET['tim_kiem'];
+        }
+        
+        $sql = "select * from tin_tuc
+        where tieu_de like '%$tim_kiem%'";
+
         $ket_qua = mysqli_query($ket_noi, $sql);
     ?>
 
     <a href="./form_insert.php">Thêm bài viết</a>
+    <a href="index.php">Trang chủ</a>
 
     <table border="1" width="100%">
+        <caption>
+            <form action="">
+                <input type="search" name="tim_kiem" value="<?php echo $tim_kiem ?>">
+            </form>
+        </caption>
         <tr>
             <th>Mã</th>
             <th>Tiêu đề</th>

@@ -16,6 +16,8 @@
         $bai_tin_tuc = mysqli_fetch_array($ket_qua);
     ?>
 
+    <a href="index.php">Trang chủ</a>
+
     <h1>
         <?php echo $bai_tin_tuc['tieu_de'] ?>
     </h1>
