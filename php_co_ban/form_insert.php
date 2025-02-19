@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="index.php">Trang chủ</a>
     <form method="post" action="process_insert.php">
         Tiêu đề
         <input type="text" name="title">

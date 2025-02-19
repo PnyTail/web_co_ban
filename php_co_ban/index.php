@@ -11,14 +11,34 @@
     <?php 
         include 'connect.php';
 
+        $trang = 1;
+        if (isset($_GET['trang'])) {
+            $trang = $_GET['trang'];
+        }
+
         $tim_kiem = '';
 
         if (isset($_GET['tim_kiem'])) {
             $tim_kiem = $_GET['tim_kiem'];
         }
+
+        $sql_so_tin_tuc = "select count(*) from tin_tuc
+        where tieu_de like '%$tim_kiem%'";
+        $mang_so_tin_tuc = mysqli_query($ket_noi, $sql_so_tin_tuc);
+        $ket_qua_so_tin_tuc = mysqli_fetch_array($mang_so_tin_tuc);
+        $so_tin_tuc = $ket_qua_so_tin_tuc['count(*)'];
+
+        $so_tin_tuc_tren_mot_trang = 1;
+
+        $so_trang = ceil($so_tin_tuc / $so_tin_tuc_tren_mot_trang);
+        //die($so_trang);
+
+        $bo_qua = $so_tin_tuc_tren_mot_trang * ($trang - 1);
+
         
         $sql = "select * from tin_tuc
-        where tieu_de like '%$tim_kiem%'";
+        where tieu_de like '%$tim_kiem%'
+        limit $so_tin_tuc_tren_mot_trang offset $bo_qua";
 
         $ket_qua = mysqli_query($ket_noi, $sql);
     ?>
@@ -63,6 +83,11 @@
             </tr>
         <?php endforeach ?>
     </table>
+    <?php for($i = 1; $i <= $so_trang; $i++) { ?>
+        <a href="?trang=<?php echo $i ?>&tim_kiem=<?php echo $tim_kiem ?>">
+            <?php echo $i ?>
+        </a>
+    <?php } ?>
 
     <?php mysqli_close($ket_noi) ?>
 
