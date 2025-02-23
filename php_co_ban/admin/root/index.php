@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Đây là giao diện khách hàng</h1>
+    <h1>Đây là giao diện admin</h1>
+    <?php
+        include '../menu.php';
+    ?>
 </body>
 </html>
