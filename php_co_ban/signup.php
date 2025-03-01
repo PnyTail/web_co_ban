@@ -8,8 +8,10 @@
 <body>
 
     <?php
-        if (isset($_GET['error'])) {
-            echo $_GET['error'];
+        session_start();
+        if (isset($_SESSION['error'])) {
+            echo '<p style="color:red">'.$_SESSION['error'].'</p>';
+            unset($_SESSION['error']); //in ra 1 lần rồi xoá nó đi
         }
     ?>
 

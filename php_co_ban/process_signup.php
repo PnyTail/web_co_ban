@@ -11,7 +11,9 @@
     $number_rows = mysqli_fetch_array($result)['count(*)'];
 
     if ($number_rows == 1) {
-        header('location: signup.php?error=Email đã tồn tại');
+        session_start();
+        $_SESSION['error'] = 'Email đã tồn tại';
+        header('location: signup.php?');
         exit;
     }
 
