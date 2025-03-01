@@ -6,8 +6,13 @@
             </a>
         </li>
         <li>
-            <a href="login.php">
+            <a href="signin.php">
                 Đăng nhập
+            </a>
+        </li>
+        <li>
+            <a href="signup.php">
+                Đăng ký
             </a>
         </li>
     </ol>
