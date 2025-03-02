@@ -15,6 +15,8 @@
         }
     ?>
 
+    <a href="index.php">Trang chủ</a>
+    <a href="signin.php">Đăng nhập</a>
     <form action="process_signup.php" method="post">
         <h1>Form đăng ký</h1>
         Tên
