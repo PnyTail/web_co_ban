@@ -24,6 +24,12 @@
             <a href="product.php?id=<?php echo $each['id'] ?>">
                 Xem chi tiết >>>
             </a>
+            <?php if (!empty($_SESSION['id'])) { ?>
+                <br>
+                <a href="add_to_cart.php?id=<?php echo $each['id'] ?>">
+                    Thêm vào giỏ hàng
+                </a>
+            <?php } ?>
         </div>
     <?php } ?>
 </div>
