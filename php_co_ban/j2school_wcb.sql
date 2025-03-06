@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2025 at 07:52 AM
+-- Generation Time: Mar 06, 2025 at 06:39 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `j2school_wcb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `token` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `name`, `email`, `password`, `token`) VALUES
+(1, 'nam', 'nam1@gmail.com', '1234', 'user_67c430c8e6d7d0.85825383'),
+(2, 'tuan', 'tuan1@gmail.com', '1234', '');
 
 -- --------------------------------------------------------
 
@@ -69,11 +91,19 @@ INSERT INTO `products` (`id`, `name`, `photo`, `price`, `description`, `manufact
 (13, 'oppo a18', '1740464626.png', 8842, '4gb 64gb', 6),
 (14, 'iphone 16', '1740464670.png', 11223, 'pro titan tu nhien', 1),
 (15, 'xiaomi 14', '1740464745.webp', 4483, 'ultra', 7),
-(16, 'vivo v40', '1740464864.jpg', 75131, 'lite bac', 5);
+(16, 'vivo v40', '1740464864.jpg', 75131, 'lite bac', 5),
+(17, 'xiaomi 15 xanh', '1741274272.jpg', 18090, 'Xiaomi 15 5G 12GB 256GB', 7);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `manufacturers`
@@ -94,6 +124,12 @@ ALTER TABLE `products`
 --
 
 --
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
@@ -103,7 +139,7 @@ ALTER TABLE `manufacturers`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
