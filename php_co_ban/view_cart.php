@@ -3,6 +3,7 @@
 
     //nên kiểm tra nếu có session giỏ hàng trước hay không
     $cart = $_SESSION['cart'];
+    $sum = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +45,11 @@
                     </a>
                 </td>
                 <td>
-                    <?php echo $each['price'] * $each['quantity'] ?>
+                    <?php
+                        $result = $each['price'] * $each['quantity'];
+                        echo $result;
+                        $sum += $result;
+                    ?>
                 </td>
                 <td>
                     <a href="delete_product_in_cart.php?id=<?php echo $id ?>">
@@ -54,5 +59,32 @@
             </tr>
         <?php endforeach ?>
     </table>
+    <h1>
+        Tổng tiền:
+        $<?php echo $sum ?>
+    </h1>
+
+    <?php
+        $id = $_SESSION['id'];
+        require './admin/connect.php';
+        $sql = "SELECT * FROM customers WHERE id = '$id'";
+        $result = mysqli_query($connect, $sql);
+        $each = mysqli_fetch_array($result);
+    ?>
+
+    <form action="process_checkout.php" method="post">
+        Tên người nhận
+        <input type="text" name="name_receiver" value="<?php echo $each['name'] ?>">
+        <br>
+        Số điện thoại người nhận
+        <input type="text" name="phone_receiver" value="<?php echo $each['phone_number'] ?>">
+        <br>
+        Địa chỉ người nhận
+        <input type="text" name="address_receiver" value="<?php echo $each['address'] ?>">
+        <br>
+        <button type="submit">Đặt hàng</button>
+    </form>
+
+    <?php mysqli_close($connect); ?>
 </body>
 </html>

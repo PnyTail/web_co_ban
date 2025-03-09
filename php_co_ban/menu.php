@@ -22,7 +22,8 @@
                 <a href="signout.php">
                     Đăng xuất
                 </a>
-                <br>
+            </li>
+            <li>
                 <a href="./view_cart.php">Giỏ hàng</a>
             </li>
         <?php } ?>

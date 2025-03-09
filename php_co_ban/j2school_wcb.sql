@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2025 at 06:39 PM
+-- Generation Time: Mar 09, 2025 at 04:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,16 +32,10 @@ CREATE TABLE `customers` (
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(200) NOT NULL,
-  `token` varchar(50) DEFAULT NULL
+  `token` varchar(50) DEFAULT NULL,
+  `phone_number` char(20) NOT NULL,
+  `address` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `customers`
---
-
-INSERT INTO `customers` (`id`, `name`, `email`, `password`, `token`) VALUES
-(1, 'nam', 'nam1@gmail.com', '1234', 'user_67c430c8e6d7d0.85825383'),
-(2, 'tuan', 'tuan1@gmail.com', '1234', '');
 
 -- --------------------------------------------------------
 
@@ -70,6 +64,35 @@ INSERT INTO `manufacturers` (`id`, `name`, `address`, `phone`, `photo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `name_receiver` varchar(50) NOT NULL,
+  `phone_receiver` char(20) NOT NULL,
+  `address_receiver` text NOT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `total_price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_product`
+--
+
+CREATE TABLE `order_product` (
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -88,11 +111,11 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `photo`, `price`, `description`, `manufacturer_id`) VALUES
 (12, 'Iphone 14', '1740327918.jpg', 44, 'isheep', 5),
-(13, 'oppo a18', '1740464626.png', 8842, '4gb 64gb', 6),
-(14, 'iphone 16', '1740464670.png', 11223, 'pro titan tu nhien', 1),
-(15, 'xiaomi 14', '1740464745.webp', 4483, 'ultra', 7),
-(16, 'vivo v40', '1740464864.jpg', 75131, 'lite bac', 5),
-(17, 'xiaomi 15 xanh', '1741274272.jpg', 18090, 'Xiaomi 15 5G 12GB 256GB', 7);
+(13, 'oppo a18', '1740464626.png', 84, '4gb 64gb', 6),
+(14, 'iphone 16', '1740464670.png', 123, 'pro titan tu nhien', 1),
+(15, 'xiaomi 14', '1740464745.webp', 39, 'ultra', 7),
+(16, 'vivo v40', '1740464864.jpg', 75, 'lite bac', 5),
+(17, 'xiaomi 15 xanh', '1741274272.jpg', 189, 'Xiaomi 15 5G 12GB 256GB', 7);
 
 --
 -- Indexes for dumped tables
@@ -113,6 +136,20 @@ ALTER TABLE `manufacturers`
   ADD UNIQUE KEY `ten` (`name`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `order_product`
+--
+ALTER TABLE `order_product`
+  ADD PRIMARY KEY (`order_id`,`product_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -127,13 +164,19 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `manufacturers`
 --
 ALTER TABLE `manufacturers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -144,6 +187,19 @@ ALTER TABLE `products`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`);
+
+--
+-- Constraints for table `order_product`
+--
+ALTER TABLE `order_product`
+  ADD CONSTRAINT `order_product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `order_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Constraints for table `products`

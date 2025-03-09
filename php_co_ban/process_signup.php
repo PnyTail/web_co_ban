@@ -3,6 +3,8 @@
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $phone_number = $_POST['phone_number'];
+    $address = $_POST['address'];
 
     require './admin/connect.php';
     $sql = "select count(*) from customers
@@ -17,8 +19,8 @@
         exit;
     }
 
-    $sql = "insert into customers(name, email, password)
-    values('$name', '$email', '$password')";
+    $sql = "insert into customers(name, email, password, phone_number, address)
+    values('$name', '$email', '$password', '$phone_number', '$address')";
     mysqli_query($connect, $sql);
 
     $sql = "select id from customers
