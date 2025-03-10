@@ -1,3 +1,6 @@
+<?php
+    require '../check_Sadmin_login.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

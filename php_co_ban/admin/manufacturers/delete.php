@@ -1,4 +1,5 @@
 <?php
+    require '../check_Sadmin_login.php';
 
     if (empty($_GET['id'])) {
         header('location: index.php?error=Phải truyền mã để xoá');

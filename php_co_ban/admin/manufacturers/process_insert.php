@@ -1,4 +1,5 @@
 <?php
+    require '../check_Sadmin_login.php';
 
     if (empty($_POST['name']) || empty($_POST['address']) || empty($_POST['phone']) || empty($_POST['photo'])) {
         header('location: form_insert.php?error=Vui lòng nhập đầy đủ thông tin');
